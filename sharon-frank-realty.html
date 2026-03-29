@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Sharon R. Frank | Real Estate Broker – Long Island, NY</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --navy: #0b1628;
+    --navy2: #122040;
+    --gold: #c9973a;
+    --gold-light: #e0b96a;
+    --cream: #f5f0e8;
+    --white: #ffffff;
+    --gray: #8a8f9a;
+    --text: #1e2535;
+    --section-bg: #f8f6f2;
+  }
+
+  *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Jost', sans-serif;
+    background: var(--white);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* ─── NAV ─────────────────────────────────────── */
+  nav {
+    position: fixed; top:0; left:0; right:0; z-index:999;
+    display: flex; align-items:center; justify-content:space-between;
+    padding: 0 5%;
+    height: 80px;
+    background: transparent;
+    transition: background 0.4s, height 0.4s, box-shadow 0.4s;
+  }
+  nav.scrolled {
+    background: var(--navy);
+    height: 65px;
+    box-shadow: 0 4px 30px rgba(0,0,0,0.3);
+  }
+  .nav-logo {
+    display:flex; flex-direction:column; line-height:1;
+  }
+  .nav-logo .ln1 {
+    font-family:'Playfair Display', serif;
+    font-size:1.3rem; font-weight:700; color:var(--white);
+    letter-spacing:0.04em;
+  }
+  .nav-logo .ln2 {
+    font-family:'Jost',sans-serif;
+    font-size:0.6rem; font-weight:500; color:var(--gold);
+    letter-spacing:0.25em; text-transform:uppercase;
+  }
+  .nav-links { display:flex; gap:2rem; list-style:none; }
+  .nav-links a {
+    color:rgba(255,255,255,0.85); text-decoration:none;
+    font-size:0.8rem; letter-spacing:0.12em; text-transform:uppercase;
+    font-weight:500; transition:color 0.2s;
+    position:relative;
+  }
+  .nav-links a::after {
+    content:''; position:absolute; bottom:-4px; left:0; right:0;
+    height:1px; background:var(--gold); transform:scaleX(0);
+    transition:transform 0.3s; transform-origin:left;
+  }
+  .nav-links a:hover { color:var(--gold); }
+  .nav-links a:hover::after { transform:scaleX(1); }
+  .nav-cta {
+    background:var(--gold); color:var(--navy)!important;
+    padding:10px 22px; border-radius:2px;
+    font-weight:600!important; transition:background 0.2s!important;
+  }
+  .nav-cta:hover { background:var(--gold-light)!important; }
+  .nav-cta::after { display:none!important; }
+
+  /* HAMBURGER */
+  .hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; padding:4px; }
+  .hamburger span { display:block; width:24px; height:2px; background:white; transition:all 0.3s; border-radius:2px; }
+  .hamburger.open span:nth-child(1) { transform:translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity:0; }
+  .hamburger.open span:nth-child(3) { transform:translateY(-7px) rotate(-45deg); }
+
+  .mobile-menu {
+    display:none; position:fixed; top:0; left:0; right:0; bottom:0;
+    background:var(--navy); z-index:998; flex-direction:column;
+    align-items:center; justify-content:center; gap:2.5rem;
+  }
+  .mobile-menu.open { display:flex; }
+  .mobile-menu a {
+    color:white; text-decoration:none; font-size:1.4rem;
+    font-family:'Playfair Display',serif; font-weight:400;
+    letter-spacing:0.04em; transition:color 0.2s;
+  }
+  .mobile-menu a:hover { color:var(--gold); }
+
+  /* ─── HERO ────────────────────────────────────── */
+  .hero {
+    min-height:100vh;
+    background: linear-gradient(135deg, #0b1628 0%, #122040 40%, #1a3060 100%);
+    display:flex; align-items:center; position:relative; overflow:hidden;
+  }
+  .hero::before {
+    content:''; position:absolute; inset:0;
+    background: radial-gradient(ellipse at 70% 50%, rgba(201,151,58,0.12) 0%, transparent 65%);
+  }
+  /* floating geometric accents */
+  .hero-geo {
+    position:absolute; border:1px solid rgba(201,151,58,0.2);
+    border-radius:50%;
+  }
+  .geo1 { width:500px; height:500px; top:-100px; right:-100px; }
+  .geo2 { width:300px; height:300px; bottom:60px; right:15%; opacity:0.5; }
+  .geo3 { width:180px; height:180px; top:30%; right:22%; opacity:0.3; }
+
+  .hero-inner {
+    position:relative; z-index:2;
+    padding: 120px 5% 80px;
+    max-width:1200px; margin:0 auto; width:100%;
+    display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:center;
+  }
+  .hero-tag {
+    font-size:0.7rem; letter-spacing:0.3em; text-transform:uppercase;
+    color:var(--gold); margin-bottom:1.5rem; font-weight:500;
+    display:flex; align-items:center; gap:0.8rem;
+    animation: fadeUp 0.8s ease both;
+  }
+  .hero-tag::before { content:''; width:40px; height:1px; background:var(--gold); }
+
+  .hero h1 {
+    font-family:'Playfair Display',serif;
+    font-size:clamp(2.8rem,5vw,4.2rem);
+    font-weight:700; color:white; line-height:1.1;
+    margin-bottom:1.5rem;
+    animation: fadeUp 0.8s 0.15s ease both;
+  }
+  .hero h1 em { color:var(--gold); font-style:italic; }
+
+  .hero-sub {
+    color:rgba(255,255,255,0.65); font-size:1rem; line-height:1.8;
+    max-width:480px; margin-bottom:2.5rem;
+    animation: fadeUp 0.8s 0.3s ease both;
+  }
+  .hero-btns {
+    display:flex; gap:1rem; flex-wrap:wrap;
+    animation: fadeUp 0.8s 0.45s ease both;
+  }
+  .btn-primary {
+    background:var(--gold); color:var(--navy);
+    padding:15px 34px; font-weight:600; font-size:0.85rem;
+    letter-spacing:0.1em; text-transform:uppercase;
+    text-decoration:none; border-radius:2px;
+    transition:all 0.3s; display:inline-block;
+    border:2px solid var(--gold);
+  }
+  .btn-primary:hover { background:var(--gold-light); border-color:var(--gold-light); transform:translateY(-2px); box-shadow:0 8px 25px rgba(201,151,58,0.4); }
+  .btn-outline {
+    background:transparent; color:white;
+    padding:15px 34px; font-weight:500; font-size:0.85rem;
+    letter-spacing:0.1em; text-transform:uppercase;
+    text-decoration:none; border-radius:2px;
+    border:2px solid rgba(255,255,255,0.3);
+    transition:all 0.3s; display:inline-block;
+  }
+  .btn-outline:hover { border-color:white; background:rgba(255,255,255,0.05); }
+
+  .hero-stats {
+    display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem;
+    animation: fadeUp 0.8s 0.6s ease both;
+  }
+  .stat-card {
+    background:rgba(255,255,255,0.05);
+    border:1px solid rgba(201,151,58,0.25);
+    border-radius:4px; padding:1.5rem 1rem; text-align:center;
+    backdrop-filter:blur(10px);
+  }
+  .stat-num {
+    font-family:'Playfair Display',serif;
+    font-size:2rem; font-weight:700; color:var(--gold); line-height:1;
+    margin-bottom:0.4rem;
+  }
+  .stat-label {
+    font-size:0.68rem; letter-spacing:0.15em; text-transform:uppercase;
+    color:rgba(255,255,255,0.55); font-weight:500;
+  }
+
+  /* portrait placeholder */
+  .hero-portrait {
+    position:relative; display:flex; justify-content:center; align-items:center;
+    animation: fadeIn 1.2s 0.3s ease both;
+  }
+  .portrait-frame {
+    width:clamp(260px,28vw,380px);
+    aspect-ratio:3/4;
+    background: linear-gradient(160deg, rgba(201,151,58,0.15), rgba(255,255,255,0.04));
+    border:1px solid rgba(201,151,58,0.4);
+    border-radius:4px; position:relative;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    overflow:hidden;
+  }
+  .portrait-frame::before {
+    content:''; position:absolute; top:12px; left:12px; right:12px; bottom:12px;
+    border:1px solid rgba(201,151,58,0.2); border-radius:2px; pointer-events:none; z-index:2;
+  }
+  .portrait-initials {
+    font-family:'Playfair Display',serif;
+    font-size:5rem; font-weight:700; color:rgba(201,151,58,0.3); line-height:1;
+    margin-bottom:0.5rem;
+  }
+  .portrait-name-tag {
+    font-size:0.7rem; letter-spacing:0.2em; text-transform:uppercase;
+    color:rgba(255,255,255,0.4); text-align:center;
+  }
+  .portrait-badge {
+    position:absolute; bottom:24px; left:50%; transform:translateX(-50%);
+    background:var(--gold); color:var(--navy);
+    font-size:0.62rem; font-weight:700; letter-spacing:0.15em; text-transform:uppercase;
+    padding:6px 18px; white-space:nowrap; border-radius:2px;
+  }
+  .exp-ribbon {
+    position:absolute; top:24px; right:-8px;
+    background:var(--navy2); border:1px solid var(--gold);
+    color:var(--gold); font-size:0.62rem; letter-spacing:0.1em;
+    text-transform:uppercase; padding:6px 16px;
+  }
+
+  /* ─── SECTION SHARED ──────────────────────────── */
+  section { padding:90px 5%; }
+  .container { max-width:1200px; margin:0 auto; }
+  .section-tag {
+    font-size:0.68rem; letter-spacing:0.3em; text-transform:uppercase;
+    color:var(--gold); font-weight:600; margin-bottom:0.8rem;
+    display:flex; align-items:center; gap:0.8rem;
+  }
+  .section-tag::before { content:''; width:30px; height:1px; background:var(--gold); }
+  .section-title {
+    font-family:'Playfair Display',serif;
+    font-size:clamp(2rem,3.5vw,2.8rem);
+    font-weight:700; color:var(--navy); line-height:1.2;
+    margin-bottom:1rem;
+  }
+  .section-title em { color:var(--gold); font-style:italic; }
+  .section-sub {
+    color:var(--gray); font-size:1rem; line-height:1.8;
+    max-width:560px;
+  }
+
+  /* ─── ABOUT ───────────────────────────────────── */
+  #about { background:var(--white); }
+  .about-grid {
+    display:grid; grid-template-columns:1fr 1.1fr; gap:5rem; align-items:center;
+  }
+  .about-img-wrap { position:relative; }
+  .about-img {
+    width:100%; aspect-ratio:4/5;
+    background:linear-gradient(145deg, var(--navy2), var(--navy));
+    border-radius:4px; display:flex; align-items:center; justify-content:center;
+    overflow:hidden; position:relative;
+  }
+  .about-img-initials {
+    font-family:'Playfair Display',serif;
+    font-size:7rem; color:rgba(201,151,58,0.2); font-weight:700;
+  }
+  .about-accent {
+    position:absolute; bottom:-24px; right:-24px;
+    width:180px; height:180px;
+    border:2px solid var(--gold); border-radius:4px; z-index:0;
+    opacity:0.4;
+  }
+  .about-accent2 {
+    position:absolute; top:-16px; left:-16px;
+    width:80px; height:80px;
+    background:var(--gold); border-radius:2px; opacity:0.1; z-index:0;
+  }
+  .about-content { position:relative; z-index:1; }
+  .about-lead {
+    font-family:'Playfair Display',serif;
+    font-size:1.25rem; font-style:italic; color:var(--navy);
+    line-height:1.7; margin:1.5rem 0; border-left:3px solid var(--gold);
+    padding-left:1.5rem;
+  }
+  .about-body {
+    color:#555; font-size:0.95rem; line-height:1.9; margin-bottom:2rem;
+  }
+  .about-specs {
+    display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-bottom:2rem;
+  }
+  .spec-item { display:flex; align-items:center; gap:0.6rem; font-size:0.82rem; color:var(--gray); }
+  .spec-item .dot { width:6px; height:6px; background:var(--gold); border-radius:50%; flex-shrink:0; }
+
+  /* ─── SERVICES ────────────────────────────────── */
+  #services { background:var(--navy); }
+  #services .section-title { color:white; }
+  #services .section-sub { color:rgba(255,255,255,0.55); }
+  .services-grid {
+    display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; margin-top:3rem;
+  }
+  .service-card {
+    background:rgba(255,255,255,0.04);
+    border:1px solid rgba(201,151,58,0.2);
+    border-radius:4px; padding:2rem 1.8rem;
+    transition:all 0.3s; cursor:default; position:relative; overflow:hidden;
+  }
+  .service-card::before {
+    content:''; position:absolute; bottom:0; left:0; right:0;
+    height:2px; background:linear-gradient(90deg, var(--gold), var(--gold-light));
+    transform:scaleX(0); transition:transform 0.3s; transform-origin:left;
+  }
+  .service-card:hover { background:rgba(255,255,255,0.07); transform:translateY(-4px); }
+  .service-card:hover::before { transform:scaleX(1); }
+  .svc-icon {
+    width:48px; height:48px; background:rgba(201,151,58,0.12);
+    border-radius:4px; display:flex; align-items:center; justify-content:center;
+    margin-bottom:1.5rem; font-size:1.4rem;
+  }
+  .svc-title {
+    font-family:'Playfair Display',serif;
+    font-size:1.15rem; font-weight:700; color:white; margin-bottom:0.8rem;
+  }
+  .svc-body { font-size:0.85rem; color:rgba(255,255,255,0.5); line-height:1.8; }
+
+  /* ─── LISTINGS ────────────────────────────────── */
+  #listings { background:var(--section-bg); }
+  .listings-grid {
+    display:grid; grid-template-columns:repeat(3,1fr); gap:1.8rem; margin-top:3rem;
+  }
+  .listing-card {
+    background:white; border-radius:6px;
+    overflow:hidden; box-shadow:0 4px 20px rgba(0,0,0,0.06);
+    transition:all 0.3s;
+  }
+  .listing-card:hover { transform:translateY(-6px); box-shadow:0 12px 40px rgba(0,0,0,0.12); }
+  .listing-img {
+    height:200px;
+    background:linear-gradient(135deg, var(--navy2), #1e3a6e);
+    position:relative; display:flex; align-items:center; justify-content:center;
+    overflow:hidden;
+  }
+  .listing-img .house-icon { font-size:3.5rem; opacity:0.25; }
+  .listing-badge {
+    position:absolute; top:14px; left:14px;
+    font-size:0.62rem; font-weight:700; letter-spacing:0.15em; text-transform:uppercase;
+    padding:5px 12px; border-radius:2px;
+  }
+  .badge-active { background:var(--gold); color:var(--navy); }
+  .badge-sold { background:rgba(255,255,255,0.15); color:white; border:1px solid rgba(255,255,255,0.3); }
+  .listing-price {
+    position:absolute; bottom:14px; right:14px;
+    font-family:'Playfair Display',serif; font-size:1.4rem; font-weight:700;
+    color:white; text-shadow:0 2px 8px rgba(0,0,0,0.4);
+  }
+  .listing-body { padding:1.4rem; }
+  .listing-addr {
+    font-weight:600; font-size:0.9rem; color:var(--navy); margin-bottom:0.3rem;
+  }
+  .listing-city { font-size:0.78rem; color:var(--gray); margin-bottom:1rem; }
+  .listing-specs {
+    display:flex; gap:1rem; font-size:0.75rem; color:var(--gray);
+    border-top:1px solid #f0ece4; padding-top:0.8rem;
+  }
+  .listing-specs span { display:flex; align-items:center; gap:0.3rem; }
+
+  /* ─── AREAS ───────────────────────────────────── */
+  #areas { background:white; }
+  .areas-grid {
+    display:grid; grid-template-columns:repeat(4,1fr); gap:1.2rem; margin-top:3rem;
+  }
+  .area-card {
+    background:var(--section-bg);
+    border:1px solid #ede9e0;
+    border-radius:4px; padding:1.8rem 1.4rem; text-align:center;
+    transition:all 0.3s; cursor:default;
+  }
+  .area-card:hover {
+    background:var(--navy); border-color:var(--navy);
+    transform:translateY(-4px);
+  }
+  .area-card:hover .area-name { color:white; }
+  .area-card:hover .area-sub { color:rgba(255,255,255,0.5); }
+  .area-icon { font-size:1.8rem; margin-bottom:0.8rem; }
+  .area-name {
+    font-family:'Playfair Display',serif;
+    font-size:1.1rem; font-weight:700; color:var(--navy);
+    margin-bottom:0.3rem; transition:color 0.3s;
+  }
+  .area-sub { font-size:0.72rem; color:var(--gray); letter-spacing:0.1em; text-transform:uppercase; transition:color 0.3s; }
+
+  /* ─── TESTIMONIALS ────────────────────────────── */
+  #testimonials { background:var(--section-bg); }
+  .testimonials-grid {
+    display:grid; grid-template-columns:repeat(3,1fr); gap:1.8rem; margin-top:3rem;
+  }
+  .testi-card {
+    background:white; border-radius:6px; padding:2rem;
+    border:1px solid #ede9e0;
+    transition:box-shadow 0.3s;
+  }
+  .testi-card:hover { box-shadow:0 8px 30px rgba(0,0,0,0.08); }
+  .testi-stars { color:var(--gold); font-size:1rem; margin-bottom:1rem; letter-spacing:2px; }
+  .testi-quote {
+    font-family:'Playfair Display',serif; font-style:italic;
+    font-size:0.95rem; color:var(--navy); line-height:1.8; margin-bottom:1.5rem;
+  }
+  .testi-author { display:flex; align-items:center; gap:0.8rem; }
+  .testi-avatar {
+    width:42px; height:42px; border-radius:50%;
+    background:linear-gradient(135deg, var(--navy2), var(--navy));
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Playfair Display',serif; color:var(--gold); font-weight:700;
+    font-size:0.9rem; flex-shrink:0;
+  }
+  .testi-name { font-weight:600; font-size:0.85rem; color:var(--navy); }
+  .testi-loc { font-size:0.72rem; color:var(--gray); }
+
+  /* ─── CTA BAND ────────────────────────────────── */
+  .cta-band {
+    background:linear-gradient(135deg, var(--navy) 0%, #1e3a6e 100%);
+    padding:80px 5%; text-align:center; position:relative; overflow:hidden;
+  }
+  .cta-band::before {
+    content:''; position:absolute; inset:0;
+    background:radial-gradient(ellipse at 50% 50%, rgba(201,151,58,0.1), transparent 65%);
+  }
+  .cta-band h2 {
+    font-family:'Playfair Display',serif;
+    font-size:clamp(2rem,4vw,3rem); color:white; font-weight:700;
+    margin-bottom:1rem; position:relative;
+  }
+  .cta-band p { color:rgba(255,255,255,0.6); font-size:1rem; margin-bottom:2.5rem; position:relative; }
+
+  /* ─── CONTACT ─────────────────────────────────── */
+  #contact { background:white; }
+  .contact-grid {
+    display:grid; grid-template-columns:1fr 1.2fr; gap:5rem; align-items:start;
+  }
+  .contact-info h3 {
+    font-family:'Playfair Display',serif;
+    font-size:1.8rem; font-weight:700; color:var(--navy); margin-bottom:2rem;
+  }
+  .contact-item {
+    display:flex; gap:1rem; margin-bottom:1.8rem; align-items:flex-start;
+  }
+  .c-icon {
+    width:44px; height:44px; background:var(--section-bg);
+    border-radius:4px; display:flex; align-items:center; justify-content:center;
+    font-size:1.2rem; flex-shrink:0; border:1px solid #ede9e0;
+  }
+  .c-label { font-size:0.68rem; color:var(--gray); text-transform:uppercase; letter-spacing:0.12em; margin-bottom:0.2rem; }
+  .c-val { font-weight:600; color:var(--navy); font-size:0.95rem; }
+  .c-val a { color:var(--navy); text-decoration:none; }
+  .c-val a:hover { color:var(--gold); }
+
+  .contact-form { background:var(--section-bg); padding:2.5rem; border-radius:6px; border:1px solid #ede9e0; }
+  .form-row { display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-bottom:1rem; }
+  .form-group { display:flex; flex-direction:column; margin-bottom:1rem; }
+  .form-group label { font-size:0.72rem; font-weight:600; text-transform:uppercase; letter-spacing:0.12em; color:var(--gray); margin-bottom:0.5rem; }
+  .form-group input, .form-group select, .form-group textarea {
+    background:white; border:1px solid #ded9d0;
+    padding:12px 14px; border-radius:3px;
+    font-family:'Jost',sans-serif; font-size:0.9rem; color:var(--navy);
+    transition:border-color 0.2s; outline:none; resize:vertical;
+  }
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+    border-color:var(--gold);
+  }
+  .form-submit {
+    width:100%; background:var(--navy); color:white;
+    padding:15px; border:none; border-radius:3px; cursor:pointer;
+    font-family:'Jost',sans-serif; font-size:0.85rem; font-weight:600;
+    letter-spacing:0.1em; text-transform:uppercase; transition:all 0.3s;
+  }
+  .form-submit:hover { background:var(--gold); color:var(--navy); }
+
+  /* ─── FOOTER ──────────────────────────────────── */
+  footer {
+    background:var(--navy); padding:60px 5% 30px;
+  }
+  .footer-inner {
+    max-width:1200px; margin:0 auto;
+    display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:3rem;
+    padding-bottom:3rem; border-bottom:1px solid rgba(255,255,255,0.08);
+    margin-bottom:2rem;
+  }
+  .footer-brand .fn1 {
+    font-family:'Playfair Display',serif; font-size:1.4rem;
+    font-weight:700; color:white; letter-spacing:0.04em; margin-bottom:0.3rem;
+  }
+  .footer-brand .fn2 {
+    font-size:0.65rem; color:var(--gold); letter-spacing:0.25em;
+    text-transform:uppercase; margin-bottom:1rem;
+  }
+  .footer-brand p { font-size:0.82rem; color:rgba(255,255,255,0.4); line-height:1.8; margin-bottom:1.5rem; }
+  .footer-col h4 {
+    font-size:0.7rem; letter-spacing:0.2em; text-transform:uppercase;
+    color:var(--gold); margin-bottom:1.2rem; font-weight:600;
+  }
+  .footer-col ul { list-style:none; }
+  .footer-col ul li { margin-bottom:0.7rem; }
+  .footer-col ul li a {
+    color:rgba(255,255,255,0.45); text-decoration:none;
+    font-size:0.82rem; transition:color 0.2s;
+  }
+  .footer-col ul li a:hover { color:var(--gold); }
+  .footer-bottom {
+    max-width:1200px; margin:0 auto;
+    display:flex; justify-content:space-between; align-items:center;
+    font-size:0.75rem; color:rgba(255,255,255,0.25);
+  }
+  .license-num { color:rgba(255,255,255,0.2); font-size:0.7rem; }
+  .gold-line { color:var(--gold); }
+
+  /* ─── SCROLL REVEAL ───────────────────────────── */
+  .reveal {
+    opacity:0; transform:translateY(30px);
+    transition:opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible { opacity:1; transform:none; }
+  .reveal-delay-1 { transition-delay:0.1s; }
+  .reveal-delay-2 { transition-delay:0.2s; }
+  .reveal-delay-3 { transition-delay:0.3s; }
+  .reveal-delay-4 { transition-delay:0.4s; }
+
+  /* ─── ANIMATIONS ──────────────────────────────── */
+  @keyframes fadeUp {
+    from { opacity:0; transform:translateY(24px); }
+    to { opacity:1; transform:none; }
+  }
+  @keyframes fadeIn {
+    from { opacity:0; } to { opacity:1; }
+  }
+
+  /* ─── DIVIDER ─────────────────────────────────── */
+  .gold-divider {
+    display:flex; align-items:center; gap:1rem; margin:1.5rem 0;
+  }
+  .gold-divider::before, .gold-divider::after {
+    content:''; flex:1; height:1px; background:linear-gradient(90deg, var(--gold), transparent);
+  }
+  .gold-divider::after { background:linear-gradient(270deg, var(--gold), transparent); }
+  .gold-divider span { color:var(--gold); font-size:0.6rem; letter-spacing:0.3em; text-transform:uppercase; white-space:nowrap; }
+
+  /* ─── RESPONSIVE ──────────────────────────────── */
+  @media(max-width:1024px){
+    .services-grid { grid-template-columns:repeat(2,1fr); }
+    .listings-grid { grid-template-columns:repeat(2,1fr); }
+    .testimonials-grid { grid-template-columns:repeat(2,1fr); }
+    .footer-inner { grid-template-columns:1fr 1fr; }
+  }
+  @media(max-width:768px){
+    .nav-links { display:none; }
+    .hamburger { display:flex; }
+    .hero-inner { grid-template-columns:1fr; text-align:center; }
+    .hero-portrait { display:none; }
+    .hero-tag { justify-content:center; }
+    .hero-btns { justify-content:center; }
+    .hero-stats { grid-template-columns:repeat(3,1fr); }
+    .about-grid { grid-template-columns:1fr; }
+    .about-img-wrap { display:none; }
+    .contact-grid { grid-template-columns:1fr; }
+    .areas-grid { grid-template-columns:repeat(2,1fr); }
+    .services-grid { grid-template-columns:1fr; }
+    .listings-grid { grid-template-columns:1fr; }
+    .testimonials-grid { grid-template-columns:1fr; }
+    .form-row { grid-template-columns:1fr; }
+    .footer-inner { grid-template-columns:1fr; gap:2rem; }
+    .footer-bottom { flex-direction:column; gap:0.5rem; text-align:center; }
+    .about-specs { grid-template-columns:1fr; }
+  }
+  @media(max-width:480px){
+    .hero-stats { grid-template-columns:1fr; }
+    .areas-grid { grid-template-columns:1fr 1fr; }
+    section { padding:70px 5%; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <div class="nav-logo">
+    <span class="ln1">Sharon R. Frank</span>
+    <span class="ln2">Licensed Real Estate Broker</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#listings">Listings</a></li>
+    <li><a href="#areas">Areas</a></li>
+    <li><a href="#testimonials">Reviews</a></li>
+    <li><a href="#contact" class="nav-cta">Contact Me</a></li>
+  </ul>
+  <div class="hamburger" id="hamburger">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#about" onclick="closeMobile()">About</a>
+  <a href="#services" onclick="closeMobile()">Services</a>
+  <a href="#listings" onclick="closeMobile()">Listings</a>
+  <a href="#areas" onclick="closeMobile()">Areas</a>
+  <a href="#testimonials" onclick="closeMobile()">Reviews</a>
+  <a href="#contact" onclick="closeMobile()" style="color:var(--gold)">Contact Me</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-geo geo1"></div>
+  <div class="hero-geo geo2"></div>
+  <div class="hero-geo geo3"></div>
+  <div class="hero-inner container">
+    <div class="hero-text">
+      <div class="hero-tag">Long Island's Trusted Real Estate Expert</div>
+      <h1>Where Every Home<br>Tells <em>Your</em> Story</h1>
+      <p class="hero-sub">
+        With 23 years of dedication and a passion that goes beyond transactions — Sharon R. Frank brings world-class service, meticulous attention to detail, and genuine care to every client she represents.
+      </p>
+      <div class="hero-btns">
+        <a href="#listings" class="btn-primary">View Listings</a>
+        <a href="#contact" class="btn-outline">Book a Consultation</a>
+      </div>
+      <br>
+      <div class="hero-stats">
+        <div class="stat-card">
+          <div class="stat-num">23+</div>
+          <div class="stat-label">Years in Real Estate</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">$715K</div>
+          <div class="stat-label">Top Sale Price</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">4</div>
+          <div class="stat-label">Areas Served</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-portrait">
+      <div class="portrait-frame">
+        <div class="portrait-initials">SRF</div>
+        <div class="portrait-name-tag">Sharon R. Frank<br>Real Estate Broker</div>
+        <div class="portrait-badge">📍 Valley Stream, NY</div>
+        <div class="exp-ribbon">23 Years of Excellence</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-img-wrap reveal">
+        <div class="about-accent2"></div>
+        <div class="about-img">
+          <div class="about-img-initials">SRF</div>
+        </div>
+        <div class="about-accent"></div>
+      </div>
+      <div class="about-content">
+        <div class="section-tag reveal">About Sharon</div>
+        <h2 class="section-title reveal">Real Estate Is Not Just<br>Her Career — It's <em>Her Life</em></h2>
+        <blockquote class="about-lead reveal">
+          "She pours meticulous attention to detail and a lot of love into her passion for the field."
+        </blockquote>
+        <p class="about-body reveal">
+          Sharon R. Frank is a professional real estate broker and developer who has experienced continuous success by virtue of whole-hearted service. In her 23 years of extensive service in the real estate industry, she has been dedicated to serving the needs of her clients with the utmost professionalism, world-class customer service, and unwavering attention to detail.
+        </p>
+        <div class="about-specs reveal">
+          <div class="spec-item"><span class="dot"></span>Buyer's Agent</div>
+          <div class="spec-item"><span class="dot"></span>Seller's Agent</div>
+          <div class="spec-item"><span class="dot"></span>Investor Specialist</div>
+          <div class="spec-item"><span class="dot"></span>Certified Property Manager</div>
+          <div class="spec-item"><span class="dot"></span>Business Management</div>
+          <div class="spec-item"><span class="dot"></span>Expert Negotiator</div>
+        </div>
+        <div class="gold-divider reveal"><span>Lic. #10401251312 · eXp Realty</span></div>
+        <div class="hero-btns reveal">
+          <a href="#contact" class="btn-primary">Work With Sharon</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="container">
+    <div class="section-tag reveal" style="color:var(--gold-light)">What I Offer</div>
+    <h2 class="section-title reveal" style="color:white;">Full-Service Real Estate,<br><em>Tailored to You</em></h2>
+    <p class="section-sub reveal" style="color:rgba(255,255,255,0.5);">Whether you're buying your first home, selling a longtime investment, or looking to expand your real estate portfolio — Sharon brings the expertise you need.</p>
+    <div class="services-grid">
+      <div class="service-card reveal reveal-delay-1">
+        <div class="svc-icon">🏡</div>
+        <div class="svc-title">Buyer Representation</div>
+        <p class="svc-body">From first showing to closing day, Sharon advocates fiercely for buyers — negotiating the best price and terms while ensuring a smooth, stress-free experience.</p>
+      </div>
+      <div class="service-card reveal reveal-delay-2">
+        <div class="svc-icon">🔑</div>
+        <div class="svc-title">Seller Representation</div>
+        <p class="svc-body">Strategic pricing, expert staging advice, and maximum market exposure. Sharon's sellers consistently achieve top-dollar results in any market condition.</p>
+      </div>
+      <div class="service-card reveal reveal-delay-3">
+        <div class="svc-icon">📈</div>
+        <div class="svc-title">Investment Properties</div>
+        <p class="svc-body">Deep knowledge of Long Island's investment landscape. Sharon helps investors identify high-ROI properties and build wealth through smart real estate decisions.</p>
+      </div>
+      <div class="service-card reveal reveal-delay-1">
+        <div class="svc-icon">🏢</div>
+        <div class="svc-title">Property Management</div>
+        <p class="svc-body">As a Certified Property Manager, Sharon offers comprehensive management solutions — tenant screening, maintenance coordination, and financial oversight.</p>
+      </div>
+      <div class="service-card reveal reveal-delay-2">
+        <div class="svc-icon">🤝</div>
+        <div class="svc-title">Expert Negotiations</div>
+        <p class="svc-body">With two decades of deal-closing experience, Sharon's negotiation skills are a powerful asset whether you're on the buying or selling side of the table.</p>
+      </div>
+      <div class="service-card reveal reveal-delay-3">
+        <div class="svc-icon">💼</div>
+        <div class="svc-title">Relocation Services</div>
+        <p class="svc-body">Moving to or from Long Island? Sharon provides seamless relocation support — helping families and professionals settle into their ideal neighborhoods.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LISTINGS -->
+<section id="listings">
+  <div class="container">
+    <div class="section-tag reveal">Properties</div>
+    <h2 class="section-title reveal">Featured <em>Listings</em></h2>
+    <p class="section-sub reveal">Recent activity representing Sharon's work across Long Island's most sought-after communities.</p>
+    <div class="listings-grid">
+
+      <!-- Active -->
+      <div class="listing-card reveal reveal-delay-1">
+        <div class="listing-img">
+          <div class="house-icon">🏠</div>
+          <div class="listing-badge badge-active">For Sale</div>
+          <div class="listing-price">$599K</div>
+        </div>
+        <div class="listing-body">
+          <div class="listing-addr">21878 110th Ave</div>
+          <div class="listing-city">Jamaica, NY 11429</div>
+          <div class="listing-specs">
+            <span>🛏 3 Beds</span>
+            <span>🚿 1.5 Baths</span>
+            <span>📐 1,776 sqft</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sold 1 -->
+      <div class="listing-card reveal reveal-delay-2">
+        <div class="listing-img" style="background:linear-gradient(135deg,#1a3a2e,#0f2820)">
+          <div class="house-icon">🏡</div>
+          <div class="listing-badge badge-sold">Sold · Feb 2026</div>
+          <div class="listing-price">$595K</div>
+        </div>
+        <div class="listing-body">
+          <div class="listing-addr">3327 Parkway Dr</div>
+          <div class="listing-city">Baldwin, NY 11510</div>
+          <div class="listing-specs">
+            <span>🛏 3 Beds</span>
+            <span>🚿 2 Baths</span>
+            <span>📐 1,100 sqft</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sold 2 -->
+      <div class="listing-card reveal reveal-delay-3">
+        <div class="listing-img" style="background:linear-gradient(135deg,#2a1a0f,#4a2e12)">
+          <div class="house-icon">🏘</div>
+          <div class="listing-badge badge-sold">Sold · May 2025</div>
+          <div class="listing-price">$715K</div>
+        </div>
+        <div class="listing-body">
+          <div class="listing-addr">1 Rhode Island St</div>
+          <div class="listing-city">Coram, NY 11727</div>
+          <div class="listing-specs">
+            <span>🛏 4 Beds</span>
+            <span>🚿 3 Baths</span>
+            <span>📐 2,448 sqft</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sold 3 -->
+      <div class="listing-card reveal reveal-delay-1">
+        <div class="listing-img" style="background:linear-gradient(135deg,#1a1a3a,#2a2055)">
+          <div class="house-icon">🏠</div>
+          <div class="listing-badge badge-sold">Sold · Dec 2024</div>
+          <div class="listing-price">$580K</div>
+        </div>
+        <div class="listing-body">
+          <div class="listing-addr">26 E 8th St</div>
+          <div class="listing-city">Patchogue, NY 11772</div>
+          <div class="listing-specs">
+            <span>🛏 3 Beds</span>
+            <span>🚿 3 Baths</span>
+            <span>📐 1,874 sqft</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- CTA Card -->
+      <div class="listing-card reveal reveal-delay-2" style="background:var(--navy);display:flex;align-items:center;justify-content:center;min-height:260px;">
+        <div style="text-align:center;padding:2rem;">
+          <div style="font-size:2.5rem;margin-bottom:1rem;">🔍</div>
+          <div style="font-family:'Playfair Display',serif;color:white;font-size:1.2rem;font-weight:700;margin-bottom:0.5rem;">Looking for More?</div>
+          <p style="color:rgba(255,255,255,0.5);font-size:0.82rem;margin-bottom:1.5rem;">Let Sharon find the perfect home for your needs and budget.</p>
+          <a href="#contact" class="btn-primary" style="font-size:0.75rem;padding:12px 24px;">Get in Touch</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- AREAS -->
+<section id="areas">
+  <div class="container">
+    <div class="section-tag reveal">Coverage</div>
+    <h2 class="section-title reveal">Areas <em>Served</em></h2>
+    <p class="section-sub reveal">Deep local expertise across Long Island's most vibrant communities — ensuring you get the best guidance wherever you're looking to buy or sell.</p>
+    <div class="areas-grid">
+      <div class="area-card reveal reveal-delay-1">
+        <div class="area-icon">🏙️</div>
+        <div class="area-name">Baldwin</div>
+        <div class="area-sub">Nassau County</div>
+      </div>
+      <div class="area-card reveal reveal-delay-2">
+        <div class="area-icon">⚓</div>
+        <div class="area-name">Freeport</div>
+        <div class="area-sub">Nassau County</div>
+      </div>
+      <div class="area-card reveal reveal-delay-3">
+        <div class="area-icon">🌊</div>
+        <div class="area-name">Glen Cove</div>
+        <div class="area-sub">Nassau County</div>
+      </div>
+      <div class="area-card reveal reveal-delay-4">
+        <div class="area-icon">🌳</div>
+        <div class="area-name">Hempstead</div>
+        <div class="area-sub">Nassau County</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="container">
+    <div class="section-tag reveal">Client Reviews</div>
+    <h2 class="section-title reveal">What Clients <em>Say</em></h2>
+    <p class="section-sub reveal">Sharon's commitment to excellence has earned the trust — and praise — of buyers, sellers, and investors across Long Island.</p>
+    <div class="testimonials-grid">
+      <div class="testi-card reveal reveal-delay-1">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-quote">"Sharon made the entire process of selling our home completely stress-free. Her attention to detail and market knowledge is unmatched. We got above asking price!"</p>
+        <div class="testi-author">
+          <div class="testi-avatar">MJ</div>
+          <div><div class="testi-name">Michael & Janet</div><div class="testi-loc">Baldwin, NY — Sold</div></div>
+        </div>
+      </div>
+      <div class="testi-card reveal reveal-delay-2">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-quote">"As a first-time buyer, I was nervous. Sharon walked us through every step and negotiated an incredible deal. I can't imagine going through this process without her."</p>
+        <div class="testi-author">
+          <div class="testi-avatar">RD</div>
+          <div><div class="testi-name">Rachel D.</div><div class="testi-loc">Freeport, NY — Bought</div></div>
+        </div>
+      </div>
+      <div class="testi-card reveal reveal-delay-3">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-quote">"Sharon has helped me build a rental portfolio of three properties over five years. Her investment insights and negotiating power have been invaluable to my success."</p>
+        <div class="testi-author">
+          <div class="testi-avatar">TK</div>
+          <div><div class="testi-name">Tony K.</div><div class="testi-loc">Glen Cove, NY — Investor</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BAND -->
+<div class="cta-band">
+  <h2>Ready to Make Your <em style="font-style:italic;color:var(--gold)">Move?</em></h2>
+  <p>Whether you're buying, selling, or investing — Sharon is ready to put her 23 years of expertise to work for you.</p>
+  <a href="#contact" class="btn-primary">Schedule a Free Consultation</a>
+</div>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div class="contact-grid">
+      <div>
+        <div class="section-tag reveal">Get in Touch</div>
+        <h3 class="reveal" style="font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:var(--navy);margin-bottom:2rem;line-height:1.3;">Let's Talk About<br><em style="color:var(--gold);font-style:italic;">Your Property Goals</em></h3>
+        <div class="contact-item reveal">
+          <div class="c-icon">📞</div>
+          <div>
+            <div class="c-label">Mobile</div>
+            <div class="c-val"><a href="tel:+15168053039">(516) 805-3039</a></div>
+          </div>
+        </div>
+        <div class="contact-item reveal">
+          <div class="c-icon">📍</div>
+          <div>
+            <div class="c-label">Office Address</div>
+            <div class="c-val">70 E Sunrise Hwy, Ste 500<br>Valley Stream, NY 11581</div>
+          </div>
+        </div>
+        <div class="contact-item reveal">
+          <div class="c-icon">🏢</div>
+          <div>
+            <div class="c-label">Brokerage</div>
+            <div class="c-val">eXp Realty LLC — Broker</div>
+          </div>
+        </div>
+        <div class="contact-item reveal">
+          <div class="c-icon">🪪</div>
+          <div>
+            <div class="c-label">License Number</div>
+            <div class="c-val">#10401251312</div>
+          </div>
+        </div>
+        <div class="contact-item reveal">
+          <div class="c-icon">🕐</div>
+          <div>
+            <div class="c-label">Availability</div>
+            <div class="c-val">Mon – Sat, 9AM – 7PM</div>
+          </div>
+        </div>
+      </div>
+      <div class="contact-form reveal">
+        <h4 style="font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--navy);margin-bottom:1.5rem;">Send a Message</h4>
+        <div class="form-row">
+          <div class="form-group">
+            <label>First Name</label>
+            <input type="text" placeholder="John"/>
+          </div>
+          <div class="form-group">
+            <label>Last Name</label>
+            <input type="text" placeholder="Smith"/>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" placeholder="john@email.com"/>
+          </div>
+          <div class="form-group">
+            <label>Phone</label>
+            <input type="tel" placeholder="(516) 000-0000"/>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>I'm Looking to...</label>
+          <select>
+            <option>Buy a Home</option>
+            <option>Sell My Home</option>
+            <option>Invest in Property</option>
+            <option>Property Management</option>
+            <option>General Inquiry</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Message</label>
+          <textarea rows="4" placeholder="Tell Sharon about your real estate goals..."></textarea>
+        </div>
+        <button class="form-submit" onclick="handleSubmit()">Send Message →</button>
+        <p id="form-msg" style="margin-top:0.8rem;font-size:0.8rem;color:var(--gold);display:none;text-align:center;">✅ Thank you! Sharon will get back to you within 24 hours.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="fn1">Sharon R. Frank</div>
+      <div class="fn2">Licensed Real Estate Broker · eXp Realty</div>
+      <p>Dedicated to serving Long Island buyers, sellers, and investors with 23 years of unwavering professionalism and genuine care.</p>
+      <div style="font-size:0.7rem;color:rgba(255,255,255,0.2);">Lic. #10401251312 · Valley Stream, NY 11581</div>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="#services">Buyer Representation</a></li>
+        <li><a href="#services">Seller Representation</a></li>
+        <li><a href="#services">Investment Properties</a></li>
+        <li><a href="#services">Property Management</a></li>
+        <li><a href="#services">Relocation Services</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Areas</h4>
+      <ul>
+        <li><a href="#areas">Baldwin</a></li>
+        <li><a href="#areas">Freeport</a></li>
+        <li><a href="#areas">Glen Cove</a></li>
+        <li><a href="#areas">Hempstead</a></li>
+        <li><a href="#areas">Valley Stream</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="tel:+15168053039">(516) 805-3039</a></li>
+        <li><a href="#contact">Send a Message</a></li>
+        <li><a href="#listings">View Listings</a></li>
+        <li><a href="#about">About Sharon</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 Sharon R. Frank · All Rights Reserved</span>
+    <span class="license-num">Licensed Real Estate Broker · NY Lic. #10401251312</span>
+    <span>eXp Realty LLC · Valley Stream, NY</span>
+  </div>
+</footer>
+
+<script>
+// Nav scroll
+const nav = document.getElementById('mainNav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 60);
+});
+
+// Hamburger
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+hamburger.addEventListener('click', () => {
+  hamburger.classList.toggle('open');
+  mobileMenu.classList.toggle('open');
+  document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+});
+function closeMobile() {
+  hamburger.classList.remove('open');
+  mobileMenu.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// Scroll reveal
+const revealEls = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      observer.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.12, rootMargin:'0px 0px -40px 0px' });
+revealEls.forEach(el => observer.observe(el));
+
+// Form
+function handleSubmit() {
+  const msg = document.getElementById('form-msg');
+  msg.style.display = 'block';
+  setTimeout(() => msg.style.display = 'none', 5000);
+}
+</script>
+</body>
+</html>
